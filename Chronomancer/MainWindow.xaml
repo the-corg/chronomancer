@@ -5,8 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chronomancer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Chronomancer" Width="1024" Height="640"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized" SizeToContent="Manual"
+>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
 
+        <!-- Customized Tab Control with the Minimize, Maximize, & Close buttons -->
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Data Input " VerticalAlignment="Center"/>
+                        <Button Content=" F1 " IsHitTestVisible="False"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Actual Data " VerticalAlignment="Center"/>
+                        <Button Content=" F2 " IsHitTestVisible="False"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Daily Summary " VerticalAlignment="Center"/>
+                        <Button Content=" F3 " IsHitTestVisible="False"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Weekly Summary " VerticalAlignment="Center"/>
+                        <Button Content=" F4 " IsHitTestVisible="False"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Monthly Summary " VerticalAlignment="Center"/>
+                        <Button Content=" F5 " IsHitTestVisible="False"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚙️ Settings " VerticalAlignment="Center"/>
+                        <Button Content=" F8 " IsHitTestVisible="False"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+            </TabItem>
+        </TabControl>
+
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="1" Background="RoyalBlue" Foreground="White" >
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Content="Chronomancer version 0.1"   />
+            <StatusBarItem Grid.Column="1" Content="Last Data Input: [time] [area]"/>
+        </StatusBar>
     </Grid>
 </Window>
