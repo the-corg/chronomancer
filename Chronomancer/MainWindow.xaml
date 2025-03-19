@@ -9,7 +9,7 @@
         Title="Chronomancer" Width="1024" Height="640"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized" SizeToContent="Manual"
-        FontSize="16">
+        FontSize="16" MinWidth="400" MinHeight="400">
     <Window.Resources>
         <ResourceDictionary>
             <local:MaxHeightConverter x:Key="MaxHeightConverter"/>
@@ -47,10 +47,10 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition MaxWidth="0" x:Name="Column3"/>
+                        <ColumnDefinition MaxWidth="0" x:Name="Column4"/>
+                        <ColumnDefinition MaxWidth="0" x:Name="Column5"/>
+                        <ColumnDefinition MaxWidth="0" x:Name="Column6"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -68,7 +68,7 @@
                         <TextBlock TextAlignment="Center" Text="Time to assign: 10 h 23 min 45 sec" FontSize="24" Foreground="Ivory"/>
                     </Border>
 
-                    <!-- Area selection -->
+                    <!-- Area selection 1 -->
                     <TextBlock Grid.Row="2" Text="Area" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
                     <ListBox x:Name="ListBoxForArea1" Grid.Row="3" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Gray" BorderThickness="0">
                         <ListBox.ItemsPanel>
@@ -108,12 +108,110 @@
                             IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
                             IsMoveToPointEnabled="True" Ticks="0,10,20,30,40,50,60,70,80,90,100" />
                     <Button Grid.Column="1" Grid.Row="4" Background="Black" Foreground="White" 
-                            Margin="{StaticResource InnerMarginUniform}">
+                            Margin="{StaticResource InnerMarginUniform}" Click="Button_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Confirm " VerticalAlignment="Center"/>
                             <Button Content=" ↵ " IsHitTestVisible="False"/>
                         </StackPanel>
                     </Button>
+
+
+                    <!-- Area selection 2 -->
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Area" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
+                    <ListBox x:Name="ListBoxForArea2" Grid.Row="3" Grid.Column="2" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Gray" BorderThickness="0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="MinHeight" Value="{StaticResource MinAreaButtonHeightWithoutMargins}"/>
+                                <Setter Property="MaxHeight" Value="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+                                <Setter Property="Margin" Value="0 1"/>
+                                <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBoxItem Content="Untracked" />
+                        <ListBoxItem Content="Area 1" />
+                        <ListBoxItem Content="Area 2" />
+                        <ListBoxItem Content="Area 3" />
+                        <ListBoxItem Content="Area 4" />
+                        <ListBoxItem Content="Area 5" />
+                        <ListBoxItem Content="Area 6" />
+                        <ListBoxItem Content="Area 7" />
+                        <ListBoxItem Content="Area 8" />
+                        <ListBoxItem Content="Area 9" />
+                    </ListBox>
+                    <Button Grid.Row="4" Grid.Column="2" Content="Cancel" Background="Black" Foreground="White" Margin="{StaticResource InnerMarginUniform}"
+        Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+
+                    <!-- Percentage 2 -->
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="Time, %" TextAlignment="Center" 
+           Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
+                    <Slider Grid.Column="3" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
+        IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
+        IsMoveToPointEnabled="True" Ticks="0,10,20,30,40,50,60,70,80,90,100" />
+                    <Button Grid.Column="3" Grid.Row="4" Background="Black" Foreground="White" 
+        Margin="{StaticResource InnerMarginUniform}" Click="Button_Click2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Confirm " VerticalAlignment="Center"/>
+                            <Button Content=" ↵ " IsHitTestVisible="False"/>
+                        </StackPanel>
+                    </Button>
+
+
+                    <!-- Area selection 3 -->
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Area" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
+                    <ListBox x:Name="ListBoxForArea3" Grid.Row="3" Grid.Column="4" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Gray" BorderThickness="0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="MinHeight" Value="{StaticResource MinAreaButtonHeightWithoutMargins}"/>
+                                <Setter Property="MaxHeight" Value="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+                                <Setter Property="Margin" Value="0 1"/>
+                                <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBoxItem Content="Untracked" />
+                        <ListBoxItem Content="Area 1" />
+                        <ListBoxItem Content="Area 2" />
+                        <ListBoxItem Content="Area 3" />
+                        <ListBoxItem Content="Area 4" />
+                        <ListBoxItem Content="Area 5" />
+                        <ListBoxItem Content="Area 6" />
+                        <ListBoxItem Content="Area 7" />
+                        <ListBoxItem Content="Area 8" />
+                        <ListBoxItem Content="Area 9" />
+                    </ListBox>
+                    <Button Grid.Row="4" Grid.Column="4" Content="Cancel" Background="Black" Foreground="White" Margin="{StaticResource InnerMarginUniform}"
+        Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+
+                    <!-- Percentage 3 -->
+                    <TextBlock Grid.Row="2" Grid.Column="5" Text="Time, %" TextAlignment="Center" 
+           Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
+                    <Slider Grid.Column="5" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
+        IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
+        IsMoveToPointEnabled="True" Ticks="0,10,20,30,40,50,60,70,80,90,100" />
+                    <Button Grid.Column="5" Grid.Row="4" Background="Black" Foreground="White" 
+        Margin="{StaticResource InnerMarginUniform}" Click="Button_Click2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Confirm " VerticalAlignment="Center"/>
+                            <Button Content=" ↵ " IsHitTestVisible="False"/>
+                        </StackPanel>
+                    </Button>
+
+
                 </Grid>
             </TabItem>
             <TabItem>
