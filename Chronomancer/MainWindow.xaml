@@ -3,20 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Chronomancer"
+        xmlns:local="clr-namespace:Chronomancer" 
+        xmlns:sys="clr-namespace:System;assembly=netstandard"
         mc:Ignorable="d"
         Title="Chronomancer" Width="1024" Height="640"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized" SizeToContent="Manual"
->
-    <Grid>
+        FontSize="16">
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:MaxHeightConverter x:Key="MaxHeightConverter"/>
+
+            <sys:Double x:Key="MinAreaButtonHeightWithoutMargins">24</sys:Double>
+            <sys:Double x:Key="MaxAreaButtonHeightWithoutMargins">64</sys:Double>
+            <!-- Recommended: Add 2 to the previous value -->
+            <sys:Double x:Key="MaxAreaButtonHeightWithMargins">66</sys:Double>
+
+            <Thickness x:Key="OuterBorder" Left="16" Right="16" Top="0" Bottom="0"/>
+
+            <sys:Double x:Key="InnerMargin">12</sys:Double>
+            <Thickness x:Key="InnerMarginUniform" Left="{StaticResource InnerMargin}" Top="{StaticResource InnerMargin}" Right="{StaticResource InnerMargin}" Bottom="{StaticResource InnerMargin}"/>
+            <Thickness x:Key="InnerMarginHorizontal" Left="{StaticResource InnerMargin}" Top="0" Right="{StaticResource InnerMargin}" Bottom="0"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid SnapsToDevicePixels="True">
+
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
 
         <!-- Customized Tab Control with the Minimize, Maximize, & Close buttons -->
-        <TabControl>
+        <TabControl BorderBrush="RoyalBlue" BorderThickness="{StaticResource OuterBorder}" Background="Gray" Padding="0">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -24,43 +42,115 @@
                         <Button Content=" F1 " IsHitTestVisible="False"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+                <!-- <local:InputView DataContext="{Binding InputViewModel}" /> -->
+                <Grid VerticalAlignment="Stretch" Background="Gray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1024*" 
+                                       MaxHeight="{Binding ElementName=ListBoxForArea1, Path=Items.Count, Mode=OneWay,
+                                                   Converter={StaticResource MaxHeightConverter}, 
+                                                   ConverterParameter={StaticResource MaxAreaButtonHeightWithMargins}}"/>
+                        <!-- TODO Binding: (64+4)*N, N - Num of areas -->
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border Background="RoyalBlue" Height="48" Padding="8" Grid.ColumnSpan="6">
+                        <TextBlock TextAlignment="Center" Text="Time to assign: 10 h 23 min 45 sec" FontSize="24" Foreground="Ivory"/>
+                    </Border>
+
+                    <!-- Area selection -->
+                    <TextBlock Grid.Row="2" Text="Area" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
+                    <ListBox x:Name="ListBoxForArea1" Grid.Row="3" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Gray" BorderThickness="0">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="MinHeight" Value="{StaticResource MinAreaButtonHeightWithoutMargins}"/>
+                                <Setter Property="MaxHeight" Value="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+                                <Setter Property="Margin" Value="0 1"/>
+                                <Setter Property="Background" Value="LightGoldenrodYellow"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBoxItem Content="Untracked" />
+                        <ListBoxItem Content="Area 1" />
+                        <ListBoxItem Content="Area 2" />
+                        <ListBoxItem Content="Area 3" />
+                        <ListBoxItem Content="Area 4" />
+                        <ListBoxItem Content="Area 5" />
+                        <ListBoxItem Content="Area 6" />
+                        <ListBoxItem Content="Area 7" />
+                        <ListBoxItem Content="Area 8" />
+                        <ListBoxItem Content="Area 9" />
+                    </ListBox>
+                    <Button Grid.Row="4" Content="Cancel" Background="Black" Foreground="White" Margin="{StaticResource InnerMarginUniform}"
+                            Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+
+                    <!-- Percentage 1 -->
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Time, %" TextAlignment="Center" 
+                               Margin="{StaticResource InnerMarginUniform}" Foreground="Ivory"/>
+                    <Slider Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
+                            IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
+                            IsMoveToPointEnabled="True" Ticks="0,10,20,30,40,50,60,70,80,90,100" />
+                    <Button Grid.Column="1" Grid.Row="4" Background="Black" Foreground="White" 
+                            Margin="{StaticResource InnerMarginUniform}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Confirm " VerticalAlignment="Center"/>
+                            <Button Content=" ↵ " IsHitTestVisible="False"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Actual Data " VerticalAlignment="Center"/>
+                        <TextBlock Text="View Data " VerticalAlignment="Center"/>
                         <Button Content=" F2 " IsHitTestVisible="False"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+                <!-- <local:DataView DataContext="{Binding DataViewModel}" /> -->
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Daily Summary " VerticalAlignment="Center"/>
+                        <TextBlock Text="Daily Chart " VerticalAlignment="Center"/>
                         <Button Content=" F3 " IsHitTestVisible="False"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+                <!-- <local:DailyView DataContext="{Binding DailyViewModel}" /> -->
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Weekly Summary " VerticalAlignment="Center"/>
+                        <TextBlock Text="Weekly Chart " VerticalAlignment="Center"/>
                         <Button Content=" F4 " IsHitTestVisible="False"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+                <!-- <local:WeeklyView DataContext="{Binding WeeklyViewModel}" /> -->
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Monthly Summary " VerticalAlignment="Center"/>
+                        <TextBlock Text="Monthly Chart " VerticalAlignment="Center"/>
                         <Button Content=" F5 " IsHitTestVisible="False"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+                <!-- <local:MonthlyView DataContext="{Binding MonthlyViewModel}" /> -->
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -69,12 +159,12 @@
                         <Button Content=" F8 " IsHitTestVisible="False"/>
                     </StackPanel>
                 </TabItem.Header>
-                <!-- <local:DataInputView DataContext="{Binding DataInputViewModel}" /> -->
+                <!-- <local:SettingsView DataContext="{Binding SettingsViewModel}" /> -->
             </TabItem>
         </TabControl>
 
         <!-- Status Bar -->
-        <StatusBar Grid.Row="1" Background="RoyalBlue" Foreground="White" >
+        <StatusBar Grid.Row="1" Background="RoyalBlue" Foreground="White" FontSize="14" Padding="{StaticResource OuterBorder}">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
