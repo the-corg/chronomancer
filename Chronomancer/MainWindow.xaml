@@ -101,7 +101,7 @@
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
                     <Button Grid.Row="4" Content="Cancel" Background="Black" Foreground="White" Margin="{StaticResource InnerMarginUniform}"
-                            Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+                            Height="{StaticResource MaxAreaButtonHeightWithoutMargins}" Click="Button_Click"/>
 
                     <!-- Percentage 1 -->
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="Time, %" TextAlignment="Center" 
@@ -110,7 +110,7 @@
                             IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
                             IsMoveToPointEnabled="True" Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
                     <Button Grid.Column="1" Grid.Row="4" Background="Black" Foreground="White" 
-                            Margin="{StaticResource InnerMarginUniform}" Click="Button_Click">
+                            Margin="{StaticResource InnerMarginUniform}" x:Name="AddSecondAreaButton" Click="AddSecondAreaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Add Area" VerticalAlignment="Center"/>
                             <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0"/>
@@ -158,7 +158,7 @@
         IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
         IsMoveToPointEnabled="True" Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
                     <Button Grid.Column="3" Grid.Row="4" Background="Black" Foreground="White" 
-        Margin="{StaticResource InnerMarginUniform}" Click="Button_Click2">
+        Margin="{StaticResource InnerMarginUniform}" x:Name="AddThirdAreaButton" Click="AddThirdAreaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Add Area" VerticalAlignment="Center"/>
                             <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0"/>

@@ -1,72 +1,60 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 namespace Chronomancer
 {
     public partial class MainWindow : Window
     {
+        // For Grid Column animation
+        private readonly Storyboard _gridColumnStoryboard = new Storyboard();
+        private readonly Duration _gridColimnAnimationDuration = new Duration(TimeSpan.FromMilliseconds(300));
+        private readonly DoubleAnimation _gridColumnAnimation = new DoubleAnimation();
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGridColumnAnimation();
+        }
+
+        private void InitializeGridColumnAnimation()
+        {
+            _gridColumnAnimation.Duration = _gridColimnAnimationDuration;
+            _gridColumnAnimation.From = 0;
+            _gridColumnAnimation.FillBehavior = FillBehavior.Stop; // Otherwise the animation continues to override the value
+
+            _gridColumnStoryboard.Children.Add(_gridColumnAnimation);
+            Storyboard.SetTargetProperty(_gridColumnAnimation, new PropertyPath("(ColumnDefinition.MaxWidth)"));
+        }
+
+        private void AddSecondAreaButton_Click(object sender, RoutedEventArgs e)
+        {
+            _gridColumnAnimation.To = Application.Current.MainWindow.ActualWidth / 4;
+            AnimateColumns(Column3, Column4);
+        }
+        private void AddThirdAreaButton_Click(object sender, RoutedEventArgs e)
+        {
+            _gridColumnAnimation.To = Application.Current.MainWindow.ActualWidth / 6;
+            AnimateColumns(Column5, Column6);
+        }
+
+        private void AnimateColumns(ColumnDefinition column1, ColumnDefinition column2)
+        {
+            Storyboard.SetTarget(_gridColumnAnimation, column1);
+            _gridColumnStoryboard.Begin();
+            Storyboard.SetTarget(_gridColumnAnimation, column2);
+            _gridColumnStoryboard.Begin();
+
+            column1.MaxWidth = double.PositiveInfinity;
+            column2.MaxWidth = double.PositiveInfinity;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard storyboard = new Storyboard();
-            Duration duration = new Duration(TimeSpan.FromMilliseconds(500));
-            CubicEase ease = new CubicEase { EasingMode = EasingMode.EaseOut };
-            double targetColumnWidth = Application.Current.MainWindow.Width / 4;
-
-            DoubleAnimation animation = new DoubleAnimation();
-            animation.EasingFunction = ease;
-            animation.Duration = duration;
-            storyboard.Children.Add(animation);
-            animation.From = 0;
-            animation.To = targetColumnWidth;
-            animation.FillBehavior = FillBehavior.Stop; // Otherwise the animation continues to override the value
-
-            // Change the values before the animation, they will be restored after the animation
-            Column3.MaxWidth = double.PositiveInfinity;
-            Column4.MaxWidth = double.PositiveInfinity;
-
-            Storyboard.SetTarget(animation, Column3);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("(ColumnDefinition.MaxWidth)"));
-            storyboard.Begin();
-            Storyboard.SetTarget(animation, Column4);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("(ColumnDefinition.MaxWidth)"));
-            storyboard.Begin();
-        }
-
-        private void Animation_Completed(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Button_Click2(object sender, RoutedEventArgs e)
-        {
-            Storyboard storyboard = new Storyboard();
-            Duration duration = new Duration(TimeSpan.FromMilliseconds(500));
-            CubicEase ease = new CubicEase { EasingMode = EasingMode.EaseOut };
-            double targetColumnWidth = Application.Current.MainWindow.Width / 6;
-
-            DoubleAnimation animation = new DoubleAnimation();
-            animation.EasingFunction = ease;
-            animation.Duration = duration;
-            storyboard.Children.Add(animation);
-            animation.From = 0;
-            animation.To = targetColumnWidth;
-            animation.FillBehavior = FillBehavior.Stop; // Otherwise the animation continues to override the value
-
-            // Change the values before the animation, they will be restored after the animation
-            Column5.MaxWidth = double.PositiveInfinity;
-            Column6.MaxWidth = double.PositiveInfinity;
-
-            Storyboard.SetTarget(animation, Column5);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("(ColumnDefinition.MaxWidth)"));
-            storyboard.Begin();
-            Storyboard.SetTarget(animation, Column6);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("(ColumnDefinition.MaxWidth)"));
-            storyboard.Begin();
+            Column3.MaxWidth = 0;
+            Column4.MaxWidth = 0;
+            Column5.MaxWidth = 0;
+            Column6.MaxWidth = 0;
         }
     }
 }
