@@ -211,16 +211,14 @@
 Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaButtonHeightWithoutMargins}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition MinWidth="72"/>
                             </Grid.ColumnDefinitions>
-                            <WrapPanel>
-                                <TextBlock Text="Confirm 23 h 20 min, including 18 h 40 min (80%) for Area 1, 2 h 20 min (10%) for Area 2, and 2 h 20 min (10%) for Area 3"
-                                       VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1"/>
-                            </WrapPanel>
-                            <Button Content="  Enter ↵  " IsHitTestVisible="False" Margin="8 0 0 0" Grid.Column="2"/>
+                            <TextBlock Margin = "4 0 0 0" Text="Confirm 23 h 20 min, including 16 h 20 min (70%) for Area 1, 2 h 20 min (10%) for Area 2, 2 h 20 min (10%) for Area 3, and 2 h 20 min (10%) of untracked time"
+                                       VerticalAlignment="Center" TextWrapping="Wrap" MaxHeight="{StaticResource MaxAreaButtonHeightWithoutMargins}" TextAlignment="Center"/>
+                                
+                                <Button Grid.Column="1" Content="Enter ↵" Padding="6" MaxHeight="36" IsHitTestVisible="False" Margin="6 0 0 0"/>
+
                         </Grid>
                     </Button>
 
