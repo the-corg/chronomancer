@@ -31,11 +31,15 @@ namespace Chronomancer
         {
             _gridColumnAnimation.To = Application.Current.MainWindow.ActualWidth / 4;
             AnimateColumns(Column3, Column4);
+
+            AddSecondAreaButton.Visibility = Visibility.Collapsed;
         }
         private void AddThirdAreaButton_Click(object sender, RoutedEventArgs e)
         {
             _gridColumnAnimation.To = Application.Current.MainWindow.ActualWidth / 6;
             AnimateColumns(Column5, Column6);
+
+            AddThirdAreaButton.Visibility = Visibility.Collapsed;
         }
 
         private void AnimateColumns(ColumnDefinition column1, ColumnDefinition column2)
@@ -49,12 +53,22 @@ namespace Chronomancer
             column2.MaxWidth = double.PositiveInfinity;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Cancel1_Click(object sender, RoutedEventArgs e)
         {
             Column3.MaxWidth = 0;
             Column4.MaxWidth = 0;
             Column5.MaxWidth = 0;
             Column6.MaxWidth = 0;
+            AddSecondAreaButton.Visibility = Visibility.Visible;
+            AddThirdAreaButton.Visibility = Visibility.Visible;
         }
+
+        private void Cancel2_Click(object sender, RoutedEventArgs e)
+        {
+            Column5.MaxWidth = 0;
+            Column6.MaxWidth = 0;
+            AddThirdAreaButton.Visibility = Visibility.Visible;
+        }
+
     }
 }
