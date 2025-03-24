@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush Color="RoyalBlue" x:Key="WindowBorder"/>
+    <SolidColorBrush Color="DarkSlateGray" x:Key="MainBackground"/>
+    <SolidColorBrush Color="White" x:Key="MainLightFontColor"/>
+    <SolidColorBrush Color="#333333" x:Key="ButtonBackground"/>
+    <SolidColorBrush Color="LightBlue" x:Key="TemporaryAreaButtonBackground"/>
+    <SolidColorBrush Color="Black" x:Key="KeyboardShortcutBackground"/>
+    <SolidColorBrush Color="White" x:Key="KeyboardShortcutForeground"/>
+</ResourceDictionary>

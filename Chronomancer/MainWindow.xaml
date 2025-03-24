@@ -4,61 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chronomancer" 
-        xmlns:sys="clr-namespace:System;assembly=netstandard"
         mc:Ignorable="d"
         Title="Chronomancer" Width="1024" Height="640"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized" SizeToContent="Manual"
         FontSize="16" MinWidth="600" MinHeight="500">
-    <Window.Resources>
-        <ResourceDictionary>
-            <local:MaxHeightConverter x:Key="MaxHeightConverter"/>
 
-            <sys:Double x:Key="MinAreaButtonHeightWithoutMargins">24</sys:Double>
-            <sys:Double x:Key="MaxAreaButtonHeightWithoutMargins">64</sys:Double>
-            <!-- Recommended: Add 2 to the previous value -->
-            <sys:Double x:Key="MaxAreaButtonHeightWithMargins">66</sys:Double>
-
-            <Thickness x:Key="OuterBorder" Left="16" Right="16" Top="0" Bottom="0"/>
-
-            <sys:Double x:Key="InnerMargin">12</sys:Double>
-            <Thickness x:Key="InnerMarginUniform" Left="{StaticResource InnerMargin}" Top="{StaticResource InnerMargin}" Right="{StaticResource InnerMargin}" Bottom="{StaticResource InnerMargin}"/>
-            <Thickness x:Key="InnerMarginHorizontal" Left="{StaticResource InnerMargin}" Top="0" Right="{StaticResource InnerMargin}" Bottom="0"/>
-            <Thickness x:Key="InnerMarginWithoutTop" Left="{StaticResource InnerMargin}" Top="0" Right="{StaticResource InnerMargin}" Bottom="{StaticResource InnerMargin}"/>
-
-            <sys:Double x:Key="InputTimeBarTextFontSize">22</sys:Double>
-            <sys:Double x:Key="InputTimeBarControlFontSize">24</sys:Double>
-            <sys:Double x:Key="InputTimeBarControlHeight">38</sys:Double>
-            
-            <!-- Colors -->
-            <SolidColorBrush Color="RoyalBlue" x:Key="WindowBorder"/>
-            <SolidColorBrush Color="DarkSlateGray" x:Key="MainBackground"/>
-            <SolidColorBrush Color="White" x:Key="MainLightFontColor"/>
-            <SolidColorBrush Color="#333333" x:Key="ButtonBackground"/>
-            <SolidColorBrush Color="LightBlue" x:Key="TemporaryAreaButtonBackground"/>
-            <SolidColorBrush Color="Black" x:Key="KeyboardShortcutBackground"/>
-            <SolidColorBrush Color="White" x:Key="KeyboardShortcutForeground"/>
-
-            <Style x:Key="KeyboardShortcutButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                <Setter Property="Background" Value="{StaticResource KeyboardShortcutBackground}"/>
-                <Setter Property="Foreground" Value="{StaticResource KeyboardShortcutForeground}"/>
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
     <Grid SnapsToDevicePixels="True">
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="24"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Customized Tab Control with the Minimize, Maximize, & Close buttons -->
-        <TabControl BorderBrush="{StaticResource WindowBorder}" BorderThickness="{StaticResource OuterBorder}" Background="{StaticResource MainBackground}" Padding="0">
+        <TabControl Padding="0" BorderBrush="{StaticResource WindowBorder}" 
+                    BorderThickness="{StaticResource OuterBorder}" Background="{StaticResource MainBackground}">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Data Input " VerticalAlignment="Center"/>
-                        <Button Content=" F1 " IsHitTestVisible="False"/>
+                        <Button Content=" F1 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:InputView DataContext="{Binding InputViewModel}" /> -->
@@ -72,7 +38,7 @@
                         <ColumnDefinition MaxWidth="0" x:Name="Column6"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="92"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="1024*" 
@@ -85,7 +51,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Time entry -->
-                    <Grid Grid.ColumnSpan="6" Background="{StaticResource WindowBorder}">
+                    <Grid Grid.ColumnSpan="6" Height="92" Background="{StaticResource WindowBorder}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="12"/>
                             <RowDefinition/>
@@ -151,8 +117,10 @@
                     </Grid>
 
                     <!-- Area selection 1 -->
-                    <TextBlock Grid.Row="2" Text="Area" FontWeight="DemiBold" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
-                    <ListBox x:Name="ListBoxForArea1" Grid.Row="3" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Transparent" BorderThickness="0">
+                    <TextBlock Grid.Row="2" Text="Area" FontWeight="DemiBold" TextAlignment="Center" 
+                               Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
+                    <ListBox x:Name="ListBoxForArea1" Grid.Row="3" Margin="{StaticResource InnerMarginHorizontal}" 
+                             Padding="0" Background="Transparent" BorderThickness="0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1"/>
@@ -180,7 +148,8 @@
                         <ListBoxItem Content="Area 8" />
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
-                    <Button Grid.Row="4" Content="Cancel" Background="{StaticResource ButtonBackground}" Foreground="{StaticResource MainLightFontColor}" Margin="{StaticResource InnerMarginUniform}"
+                    <Button Grid.Row="4" Content="Cancel" Background="{StaticResource ButtonBackground}" 
+                            Foreground="{StaticResource MainLightFontColor}" Margin="{StaticResource InnerMarginUniform}"
                             Height="{StaticResource MaxAreaButtonHeightWithoutMargins}" x:Name="Cancel1" Click="Cancel1_Click"/>
 
                     <!-- Percentage 1 -->
@@ -189,18 +158,24 @@
                     <Slider Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
                             IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
                             IsMoveToPointEnabled="True" Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
-                    <Button Grid.Column="1" Grid.Row="4" Background="{StaticResource ButtonBackground}" Foreground="{StaticResource MainLightFontColor}" 
-                            Margin="{StaticResource InnerMarginUniform}" x:Name="AddSecondAreaButton" Click="AddSecondAreaButton_Click">
+                    <Button Grid.Column="1" Grid.Row="4" Background="{StaticResource ButtonBackground}" 
+                            Foreground="{StaticResource MainLightFontColor}" 
+                            Margin="{StaticResource InnerMarginUniform}" x:Name="AddSecondAreaButton" 
+                            Click="AddSecondAreaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Add Area" VerticalAlignment="Center"/>
-                            <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0" Style="{StaticResource KeyboardShortcutButton}"/>
+                            <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0" 
+                                    Style="{StaticResource KeyboardShortcutButton}"/>
                         </StackPanel>
                     </Button>
 
 
                     <!-- Area selection 2 -->
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Area" FontWeight="DemiBold" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
-                    <ListBox x:Name="ListBoxForArea2" Grid.Row="3" Grid.Column="2" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Transparent" BorderThickness="0">
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Area" FontWeight="DemiBold" TextAlignment="Center" 
+                               Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
+                    <ListBox x:Name="ListBoxForArea2" Grid.Row="3" Grid.Column="2" 
+                             Margin="{StaticResource InnerMarginHorizontal}" Padding="0" 
+                             Background="Transparent" BorderThickness="0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1" />
@@ -228,27 +203,39 @@
                         <ListBoxItem Content="Area 8" />
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
-                    <Button Grid.Row="4" Grid.Column="2" Content="Cancel" Background="{StaticResource ButtonBackground}" Foreground="{StaticResource MainLightFontColor}" Margin="{StaticResource InnerMarginUniform}"
-        Height="{StaticResource MaxAreaButtonHeightWithoutMargins}" x:Name="Cancel2" Click="Cancel2_Click"/>
+                    <Button Grid.Row="4" Grid.Column="2" Content="Cancel" 
+                            Background="{StaticResource ButtonBackground}" 
+                            Foreground="{StaticResource MainLightFontColor}" 
+                            Margin="{StaticResource InnerMarginUniform}" 
+                            Height="{StaticResource MaxAreaButtonHeightWithoutMargins}" 
+                            x:Name="Cancel2" Click="Cancel2_Click"/>
 
                     <!-- Percentage 2 -->
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="Time, %" FontWeight="DemiBold" TextAlignment="Center" 
-           Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
-                    <Slider Grid.Column="3" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
-        IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
-        IsMoveToPointEnabled="True" Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
-                    <Button Grid.Column="3" Grid.Row="4" Background="{StaticResource ButtonBackground}" Foreground="{StaticResource MainLightFontColor}" 
-        Margin="{StaticResource InnerMarginUniform}" x:Name="AddThirdAreaButton" Click="AddThirdAreaButton_Click">
+                               Margin="{StaticResource InnerMarginUniform}" 
+                               Foreground="{StaticResource MainLightFontColor}"/>
+                    <Slider Grid.Column="3" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both" 
+                            IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
+                            IsMoveToPointEnabled="True" Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
+                    <Button Grid.Column="3" Grid.Row="4" 
+                            Background="{StaticResource ButtonBackground}" 
+                            Foreground="{StaticResource MainLightFontColor}" 
+                            Margin="{StaticResource InnerMarginUniform}" 
+                            x:Name="AddThirdAreaButton" Click="AddThirdAreaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Add Area" VerticalAlignment="Center"/>
-                            <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0" Style="{StaticResource KeyboardShortcutButton}"/>
+                            <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0" 
+                                    Style="{StaticResource KeyboardShortcutButton}"/>
                         </StackPanel>
                     </Button>
 
 
                     <!-- Area selection 3 -->
-                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Area" FontWeight="DemiBold" TextAlignment="Center" Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
-                    <ListBox x:Name="ListBoxForArea3" Grid.Row="3" Grid.Column="4" Margin="{StaticResource InnerMarginHorizontal}" Padding="0" Background="Transparent" BorderThickness="0">
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Area" FontWeight="DemiBold" TextAlignment="Center" 
+                               Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
+                    <ListBox x:Name="ListBoxForArea3" Grid.Row="3" Grid.Column="4" 
+                             Margin="{StaticResource InnerMarginHorizontal}" Padding="0" 
+                             Background="Transparent" BorderThickness="0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1" />
@@ -276,28 +263,36 @@
                         <ListBoxItem Content="Area 8" />
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
-                    <Button Grid.Row="4" Grid.Column="4" Content="Cancel" Background="{StaticResource ButtonBackground}" Foreground="{StaticResource MainLightFontColor}" Margin="{StaticResource InnerMarginUniform}"
-        Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
+                    <Button Grid.Row="4" Grid.Column="4" Content="Cancel" 
+                            Background="{StaticResource ButtonBackground}" 
+                            Foreground="{StaticResource MainLightFontColor}" 
+                            Margin="{StaticResource InnerMarginUniform}" 
+                            Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
 
                     <!-- Percentage 3 -->
                     <TextBlock Grid.Row="2" Grid.Column="5" Text="Time, %" FontWeight="DemiBold" TextAlignment="Center" 
-           Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
-                    <Slider Grid.Column="5" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
-        IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
-        IsMoveToPointEnabled="True" Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
+                               Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
+                    <Slider Grid.Column="5" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" 
+                            TickPlacement="Both" IsSnapToTickEnabled="True" Value="100" Maximum="100" 
+                            AutoToolTipPlacement="BottomRight" IsMoveToPointEnabled="True" 
+                            Ticks="0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100"/>
 
                     <!-- Huge Record button -->
-                    <Button Grid.ColumnSpan="6" Grid.Row="5" Background="{StaticResource ButtonBackground}" Foreground="{StaticResource MainLightFontColor}" 
-Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaButtonHeightWithoutMargins}">
+                    <Button Grid.ColumnSpan="6" Grid.Row="5" Background="{StaticResource ButtonBackground}" 
+                            Foreground="{StaticResource MainLightFontColor}" 
+                            Margin="{StaticResource InnerMarginWithoutTop}" 
+                            Height="{StaticResource MaxAreaButtonHeightWithoutMargins}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15*"/>
                                 <ColumnDefinition MinWidth="72"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Margin = "4 0 0 0" Text="Confirm 23 h 20 min, including 16 h 20 min (70%) for Area 1, 2 h 20 min (10%) for Area 2, 2 h 20 min (10%) for Area 3, and 2 h 20 min (10%) of untracked time"
-                                       VerticalAlignment="Center" TextWrapping="Wrap" MaxHeight="{StaticResource MaxAreaButtonHeightWithoutMargins}" TextAlignment="Center"/>
+                                       VerticalAlignment="Center" TextWrapping="Wrap" 
+                                       MaxHeight="{StaticResource MaxAreaButtonHeightWithoutMargins}" TextAlignment="Center"/>
 
-                            <Button Grid.Column="1" Content="Enter ↲" Padding="6" MaxHeight="36" IsHitTestVisible="False" Margin="6 0 0 0" Style="{StaticResource KeyboardShortcutButton}"/>
+                            <Button Grid.Column="1" Content="Enter ↲" Padding="6" MaxHeight="36" 
+                                    IsHitTestVisible="False" Margin="6 0 0 0" Style="{StaticResource KeyboardShortcutButton}"/>
 
                         </Grid>
                     </Button>
@@ -308,16 +303,30 @@ Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaB
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="View Data " VerticalAlignment="Center"/>
-                        <Button Content=" F2 " IsHitTestVisible="False"/>
+                        <Button Content=" F2 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:DataView DataContext="{Binding DataViewModel}" /> -->
+                <Grid Background="{StaticResource WindowBorder}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="36"/>
+                    </Grid.RowDefinitions>
+                    <Canvas Grid.Row="1" Grid.Column="1" Background="{StaticResource MainBackground}"/>
+                    
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Daily Chart " VerticalAlignment="Center"/>
-                        <Button Content=" F3 " IsHitTestVisible="False"/>
+                        <Button Content=" F3 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:DailyView DataContext="{Binding DailyViewModel}" /> -->
@@ -326,7 +335,7 @@ Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaB
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Weekly Chart " VerticalAlignment="Center"/>
-                        <Button Content=" F4 " IsHitTestVisible="False"/>
+                        <Button Content=" F4 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:WeeklyView DataContext="{Binding WeeklyViewModel}" /> -->
@@ -335,7 +344,7 @@ Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaB
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Monthly Chart " VerticalAlignment="Center"/>
-                        <Button Content=" F5 " IsHitTestVisible="False"/>
+                        <Button Content=" F5 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:MonthlyView DataContext="{Binding MonthlyViewModel}" /> -->
@@ -344,7 +353,7 @@ Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaB
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="⚙️ Settings " VerticalAlignment="Center"/>
-                        <Button Content=" F8 " IsHitTestVisible="False"/>
+                        <Button Content=" F8 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:SettingsView DataContext="{Binding SettingsViewModel}" /> -->
@@ -352,7 +361,8 @@ Margin="{StaticResource InnerMarginWithoutTop}" Height="{StaticResource MaxAreaB
         </TabControl>
 
         <!-- Status Bar -->
-        <StatusBar Grid.Row="1" Background="{StaticResource WindowBorder}" Foreground="{StaticResource MainLightFontColor}" FontSize="14" Padding="{StaticResource OuterBorder}">
+        <StatusBar Grid.Row="1" Background="{StaticResource WindowBorder}" Foreground="{StaticResource MainLightFontColor}" 
+                   FontSize="14" Padding="{StaticResource OuterBorder}" Height="24">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid>
