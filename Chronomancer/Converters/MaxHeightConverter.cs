@@ -8,15 +8,10 @@ namespace Chronomancer
         // Returns the product of @value = number of elements and @parameter = max height of one element
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is int && parameter is double)
-            {
-                return (int)value * (double)parameter;
-            }
-            else
-            {
-                Console.WriteLine("ERROR: MaxHeightConverter called with incorrect type of value or parameter");
+            if (value is not int || parameter is not double)
                 return 0;
-            }
+
+            return (int)value * (double)parameter;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -24,6 +19,6 @@ namespace Chronomancer
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

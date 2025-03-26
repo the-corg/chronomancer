@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chronomancer" 
+        xmlns:prop="clr-namespace:Chronomancer.Properties" 
         mc:Ignorable="d"
         Title="Chronomancer" Width="1024" Height="640"
         WindowStartupLocation="CenterScreen"
@@ -23,8 +24,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Data Input " VerticalAlignment="Center"/>
-                        <Button Content=" F1 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
+                        <TextBlock Text="{x:Static prop:Resources.DataInputTab}" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <Button Content="F1" IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:InputView DataContext="{Binding InputViewModel}" /> -->
@@ -99,16 +100,16 @@
                             </Style>
                         </Grid.Resources>
 
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="Record" VerticalAlignment="Bottom" Height="32"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Static prop:Resources.RecordLabel}" VerticalAlignment="Bottom" Height="32"/>
                         <TextBlock Grid.Column="1" Grid.Row="2" Text="10 h 23 min" VerticalAlignment="Top"/>
 
-                        <TextBlock Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Text="from"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Text="{x:Static prop:Resources.FromLabel}"/>
 
                         <Button Grid.Column="3" Grid.Row="1" Content="⭯" HorizontalAlignment="Right"/>
                         <TextBlock Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="3" Text="🞀 21 Mar 2025 🞂" VerticalAlignment="Top"/>
                         <TextBox Grid.Column="4" Grid.Row="1" Text="09:05" HorizontalAlignment="Left"/>
 
-                        <TextBlock Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" Text="to"/>
+                        <TextBlock Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" Text="{x:Static prop:Resources.ToLabel}"/>
 
                         <TextBlock Grid.Column="7" Grid.Row="2" Grid.ColumnSpan="3" Text="🞀 21 Mar 2025 🞂" VerticalAlignment="Top"/>
                         <TextBox Grid.Column="8" Grid.Row="1" Text="19:28" HorizontalAlignment="Right"/>
@@ -117,7 +118,7 @@
                     </Grid>
 
                     <!-- Area selection 1 -->
-                    <TextBlock Grid.Row="2" Text="Area" FontWeight="DemiBold" TextAlignment="Center" 
+                    <TextBlock Grid.Row="2" Text="{x:Static prop:Resources.AreaLabel}" FontWeight="DemiBold" TextAlignment="Center" 
                                Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
                     <ListBox x:Name="ListBoxForArea1" Grid.Row="3" Margin="{StaticResource InnerMarginHorizontal}" 
                              Padding="0" Background="Transparent" BorderThickness="0">
@@ -148,12 +149,12 @@
                         <ListBoxItem Content="Area 8" />
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
-                    <Button Grid.Row="4" Content="Cancel" Background="{StaticResource ButtonBackground}" 
+                    <Button Grid.Row="4" Content="{x:Static prop:Resources.CancelButton}" Background="{StaticResource ButtonBackground}" 
                             Foreground="{StaticResource MainLightFontColor}" Margin="{StaticResource InnerMarginUniform}"
                             Height="{StaticResource MaxAreaButtonHeightWithoutMargins}" x:Name="Cancel1" Click="Cancel1_Click"/>
 
                     <!-- Percentage 1 -->
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Time, %" FontWeight="DemiBold" TextAlignment="Center" 
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static prop:Resources.TimeLabel}" FontWeight="DemiBold" TextAlignment="Center" 
                                Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
                     <Slider Grid.Column="1" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both"
                             IsSnapToTickEnabled="True" Value="100" Maximum="100" AutoToolTipPlacement="BottomRight"
@@ -163,15 +164,15 @@
                             Margin="{StaticResource InnerMarginUniform}" x:Name="AddSecondAreaButton" 
                             Click="AddSecondAreaButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Add Area" VerticalAlignment="Center"/>
-                            <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0" 
+                            <TextBlock Text="{x:Static prop:Resources.AddAreaButton}" VerticalAlignment="Center"/>
+                            <Button Content="➔" IsHitTestVisible="False" Margin="8 0 0 0" 
                                     Style="{StaticResource KeyboardShortcutButton}"/>
                         </StackPanel>
                     </Button>
 
 
                     <!-- Area selection 2 -->
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="Area" FontWeight="DemiBold" TextAlignment="Center" 
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Static prop:Resources.AreaLabel}" FontWeight="DemiBold" TextAlignment="Center" 
                                Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
                     <ListBox x:Name="ListBoxForArea2" Grid.Row="3" Grid.Column="2" 
                              Margin="{StaticResource InnerMarginHorizontal}" Padding="0" 
@@ -203,7 +204,7 @@
                         <ListBoxItem Content="Area 8" />
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
-                    <Button Grid.Row="4" Grid.Column="2" Content="Cancel" 
+                    <Button Grid.Row="4" Grid.Column="2" Content="{x:Static prop:Resources.CancelButton}" 
                             Background="{StaticResource ButtonBackground}" 
                             Foreground="{StaticResource MainLightFontColor}" 
                             Margin="{StaticResource InnerMarginUniform}" 
@@ -211,7 +212,7 @@
                             x:Name="Cancel2" Click="Cancel2_Click"/>
 
                     <!-- Percentage 2 -->
-                    <TextBlock Grid.Row="2" Grid.Column="3" Text="Time, %" FontWeight="DemiBold" TextAlignment="Center" 
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="{x:Static prop:Resources.TimeLabel}" FontWeight="DemiBold" TextAlignment="Center" 
                                Margin="{StaticResource InnerMarginUniform}" 
                                Foreground="{StaticResource MainLightFontColor}"/>
                     <Slider Grid.Column="3" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" TickPlacement="Both" 
@@ -223,15 +224,15 @@
                             Margin="{StaticResource InnerMarginUniform}" 
                             x:Name="AddThirdAreaButton" Click="AddThirdAreaButton_Click">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Add Area" VerticalAlignment="Center"/>
-                            <Button Content=" ➔ " IsHitTestVisible="False" Margin="8 0 0 0" 
+                            <TextBlock Text="{x:Static prop:Resources.AddAreaButton}" VerticalAlignment="Center"/>
+                            <Button Content="➔" IsHitTestVisible="False" Margin="8 0 0 0" 
                                     Style="{StaticResource KeyboardShortcutButton}"/>
                         </StackPanel>
                     </Button>
 
 
                     <!-- Area selection 3 -->
-                    <TextBlock Grid.Row="2" Grid.Column="4" Text="Area" FontWeight="DemiBold" TextAlignment="Center" 
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="{x:Static prop:Resources.AreaLabel}" FontWeight="DemiBold" TextAlignment="Center" 
                                Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
                     <ListBox x:Name="ListBoxForArea3" Grid.Row="3" Grid.Column="4" 
                              Margin="{StaticResource InnerMarginHorizontal}" Padding="0" 
@@ -263,14 +264,14 @@
                         <ListBoxItem Content="Area 8" />
                         <ListBoxItem Content="Area 9" />
                     </ListBox>
-                    <Button Grid.Row="4" Grid.Column="4" Content="Cancel" 
+                    <Button Grid.Row="4" Grid.Column="4" Content="{x:Static prop:Resources.CancelButton}" 
                             Background="{StaticResource ButtonBackground}" 
                             Foreground="{StaticResource MainLightFontColor}" 
                             Margin="{StaticResource InnerMarginUniform}" 
                             Height="{StaticResource MaxAreaButtonHeightWithoutMargins}"/>
 
                     <!-- Percentage 3 -->
-                    <TextBlock Grid.Row="2" Grid.Column="5" Text="Time, %" FontWeight="DemiBold" TextAlignment="Center" 
+                    <TextBlock Grid.Row="2" Grid.Column="5" Text="{x:Static prop:Resources.TimeLabel}" FontWeight="DemiBold" TextAlignment="Center" 
                                Margin="{StaticResource InnerMarginUniform}" Foreground="{StaticResource MainLightFontColor}"/>
                     <Slider Grid.Column="5" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" 
                             TickPlacement="Both" IsSnapToTickEnabled="True" Value="100" Maximum="100" 
@@ -285,13 +286,14 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15*"/>
-                                <ColumnDefinition MinWidth="72"/>
+                                <ColumnDefinition MinWidth="76"/>
                             </Grid.ColumnDefinitions>
+                            <!-- TODO: Binding and resources for this string: -->
                             <TextBlock Margin = "4 0 0 0" Text="Confirm 23 h 20 min, including 16 h 20 min (70%) for Area 1, 2 h 20 min (10%) for Area 2, 2 h 20 min (10%) for Area 3, and 2 h 20 min (10%) of untracked time"
                                        VerticalAlignment="Center" TextWrapping="Wrap" 
                                        MaxHeight="{StaticResource MaxAreaButtonHeightWithoutMargins}" TextAlignment="Center"/>
 
-                            <Button Grid.Column="1" Content="Enter ↲" Padding="6" MaxHeight="36" 
+                            <Button Grid.Column="1" Content="Enter ↲" Padding="10 6" MaxHeight="36" 
                                     IsHitTestVisible="False" Margin="6 0 0 0" Style="{StaticResource KeyboardShortcutButton}"/>
 
                         </Grid>
@@ -302,8 +304,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="View Data " VerticalAlignment="Center"/>
-                        <Button Content=" F2 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
+                        <TextBlock Text="{x:Static prop:Resources.ViewDataTab}" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <Button Content="F2" IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:DataView DataContext="{Binding DataViewModel}" /> -->
@@ -325,8 +327,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Daily Chart " VerticalAlignment="Center"/>
-                        <Button Content=" F3 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
+                        <TextBlock Text="{x:Static prop:Resources.DailyChartTab}" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <Button Content="F3" IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:DailyView DataContext="{Binding DailyViewModel}" /> -->
@@ -334,8 +336,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Weekly Chart " VerticalAlignment="Center"/>
-                        <Button Content=" F4 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
+                        <TextBlock Text="{x:Static prop:Resources.WeeklyChartTab}" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <Button Content="F4" IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:WeeklyView DataContext="{Binding WeeklyViewModel}" /> -->
@@ -343,8 +345,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Monthly Chart " VerticalAlignment="Center"/>
-                        <Button Content=" F5 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
+                        <TextBlock Text="{x:Static prop:Resources.MonthlyChartTab}" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <Button Content="F5" IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:MonthlyView DataContext="{Binding MonthlyViewModel}" /> -->
@@ -352,8 +354,8 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="⚙️ Settings " VerticalAlignment="Center"/>
-                        <Button Content=" F8 " IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
+                        <TextBlock Text="{x:Static prop:Resources.SettingsTab}" Margin="0 0 6 0" VerticalAlignment="Center"/>
+                        <Button Content="F8" IsHitTestVisible="False" Style="{StaticResource KeyboardShortcutButton}"/>
                     </StackPanel>
                 </TabItem.Header>
                 <!-- <local:SettingsView DataContext="{Binding SettingsViewModel}" /> -->
@@ -376,7 +378,7 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
-            <StatusBarItem Content="Chronomancer version 0.1"   />
+            <StatusBarItem Content="Chronomancer version 0.1"   /> <!-- TODO: Binding and resources for strings here -->
             <StatusBarItem Grid.Column="1" Content="10 h 23 min"/>
             <StatusBarItem Grid.Column="2" Content="since last data input:"/>
             <StatusBarItem Grid.Column="3" Content="[area]"/>
