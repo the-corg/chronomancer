@@ -42,7 +42,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="1024*" 
+                        <RowDefinition Height="16384*" 
                                        MaxHeight="{Binding ElementName=ListBoxForArea1, Path=Items.Count, Mode=OneWay,
                                                    Converter={StaticResource MaxHeightConverter}, 
                                                    ConverterParameter={StaticResource MaxAreaButtonHeightWithMargins}}"/>
@@ -320,8 +320,13 @@
                         <RowDefinition/>
                         <RowDefinition Height="36"/>
                     </Grid.RowDefinitions>
+
+                    <local:TimeLabels Grid.Row="1" LeftTicks="False" RightTicks="True" TextAlignment="Right"/>
+                    
                     <Canvas Grid.Row="1" Grid.Column="1" Background="{StaticResource MainBackground}"/>
                     
+                    <local:TimeLabels Grid.Row="1" Grid.Column="2" LeftTicks="True" RightTicks="False" TextAlignment="Left"/>
+
                 </Grid>
             </TabItem>
             <TabItem>
@@ -378,7 +383,8 @@
                     </Grid>
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
-            <StatusBarItem Content="Chronomancer version 0.1"   /> <!-- TODO: Binding and resources for strings here -->
+            <StatusBarItem Content="Chronomancer version 0.1"/>
+            <!-- TODO: Binding and resources for strings here -->
             <StatusBarItem Grid.Column="1" Content="10 h 23 min"/>
             <StatusBarItem Grid.Column="2" Content="since last data input:"/>
             <StatusBarItem Grid.Column="3" Content="[area]"/>
