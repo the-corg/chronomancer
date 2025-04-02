@@ -8,13 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <sys:Double x:Key="TimeTickWidth">10</sys:Double>
-        <SolidColorBrush Color="Black" x:Key="TickColor"/>
+        <sys:Double x:Key="TimeTickWidth">7</sys:Double>
+        <SolidColorBrush Color="White" x:Key="TickColor"/>
         <SolidColorBrush Color="White" x:Key="TextColor"/>
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush" Value="{StaticResource TickColor}"/>
-            <Setter Property="BorderThickness" Value="0 1 0 1"/>
-        </Style>
         <Style TargetType="Label">
             <Setter Property="Margin" Value="0 -17"/>
             <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
@@ -28,33 +24,11 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <UniformGrid Visibility="{Binding LeftTicks, RelativeSource={RelativeSource AncestorType=local:TimeLabels}, 
-            Converter={StaticResource BooleanToVisibilityConverter}}" Width="{StaticResource TimeTickWidth}" Columns="1" Rows="24">
-            <Border BorderThickness="0 2 0 1"/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border BorderThickness="0 1 0 2"/>
-        </UniformGrid>
+
+        <local:HorizontalLines LineColor="{StaticResource TickColor}" Width="{StaticResource TimeTickWidth}" Quantity="25"
+                               Visibility="{Binding LeftTicks, RelativeSource={RelativeSource AncestorType=local:TimeLabels}, 
+                                            Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
         <Grid x:Name="LabelGrid" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -81,7 +55,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="1"/>
+                <RowDefinition Height="0"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="0:00"/>
             <Label Grid.Row="1" Content="1:00"/>
@@ -107,34 +81,12 @@
             <Label Grid.Row="21" Content="21:00"/>
             <Label Grid.Row="22" Content="22:00"/>
             <Label Grid.Row="23" Content="23:00"/>
-            <Label Grid.Row="24" Content="24:00"/>
+            <Label Grid.Row="24" Content="24:00" Margin="0 -18"/>
         </Grid>
-        <UniformGrid Grid.Column="2" Visibility="{Binding RightTicks, RelativeSource={RelativeSource AncestorType=local:TimeLabels}, 
-    Converter={StaticResource BooleanToVisibilityConverter}}" Width="{StaticResource TimeTickWidth}" Columns="1" Rows="24">
-            <Border BorderThickness="0 2 0 1"/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border/>
-            <Border BorderThickness="0 1 0 2"/>
-        </UniformGrid>
+
+        <local:HorizontalLines LineColor="{StaticResource TickColor}" Width="{StaticResource TimeTickWidth}" Quantity="25"
+                               Visibility="{Binding RightTicks, RelativeSource={RelativeSource AncestorType=local:TimeLabels}, 
+                                            Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="2"/>
+        
     </Grid>
 </UserControl>

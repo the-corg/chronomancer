@@ -311,9 +311,9 @@
                 <!-- <local:DataView DataContext="{Binding DataViewModel}" /> -->
                 <Grid Background="{StaticResource WindowBorder}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="36"/>
@@ -324,7 +324,9 @@
                     <local:TimeLabels Grid.Row="1" LeftTicks="False" RightTicks="True" TextAlignment="Right"/>
                     
                     <Canvas Grid.Row="1" Grid.Column="1" Background="{StaticResource MainBackground}"/>
-                    
+
+                    <local:HorizontalLines Grid.Row="1" Grid.Column="1" LineColor="#10FFFFFF" Quantity="25"/>
+
                     <local:TimeLabels Grid.Row="1" Grid.Column="2" LeftTicks="True" RightTicks="False" TextAlignment="Left"/>
 
                 </Grid>
